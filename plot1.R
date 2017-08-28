@@ -10,10 +10,10 @@ housepower <- fread(input = "household_power_consumption.txt", na.strings="?")
 str(housepower)
 
 # str shows date as Characters. Change to Date type
-housepower[, Date := lapply(.SD, as.Date, "%d/%m/%Y"), .SDcols = c("Date")]
+housepower$Date = as.Date(housepower$Date,"%d/%m/%Y")
 
-# Filter the data only for two days: 2007-02-01 and 2007-02-02. We end up with just 1441 rows
-housepower <- housepower[(Date >= "2007-02-01") & (Date <= "2007-02-02")]
+# Filter the data only for two days: 2007-02-01 and 2007-02-02
+housepower <- housepower[(Date >= as.Date("2007-02-01")) & (Date <= as.Date("2007-02-02"))]
 
 # Create the first plot, using labels given in the Instructions
 png("plot1.png", width = 480, height = 480)
